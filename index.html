@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia na Régua - Sistema de Agendamento</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fa-solid fa-scissors"></i> Barbearia na Régua</h1>
+            <p>Agende o seu horário com estilo</p>
+        </header>
+        <div class="main-grid">
+            <!-- Formulário de Agendamento -->
+            <section class="card">
+                <h2 class="card-title"><i class="fa-solid fa-calendar-plus"></i> Novo Agendamento</h2>
+                <form id="appointmentForm" novalidate>
+                    <div class="form-group">
+                        <label for="clientName"><i class="fa-solid fa-user"></i> Nome completo</label>
+                        <input type="text" id="clientName" required placeholder="Ex: Fulano Cicrano" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientPhone"><i class="fa-solid fa-phone"></i> Telefone / WhatsApp</label>
+                        <div class="phone-input">
+                            <span class="phone-prefix">+244</span>
+                            <input type="tel" id="clientPhone" required placeholder="923456789" inputmode="numeric"
+                                maxlength="9" pattern="[0-9]{9}" title="Introduza exactamente 9 dígitos">
+                        </div>
+                        <small class="field-hint" id="phoneHint">9 dígitos, sem espaços (ex: 923456789)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceType"><i class="fa-solid fa-scissors"></i> Serviço</label>
+                        <select id="serviceType" required>
+                            <option value="Corte tradicional">Escovinho — 1.000,00 Kz</option>
+                            <option value="Corte na navalha">Corte na navalha — 1.500,00 Kz</option>
+                            <option value="Barba completa">Barba completa — 800,00 Kz</option>
+                            <option value="Corte + Barba">Corte + Barba (Combo) — 2.000,00 Kz</option>
+                            <option value="Pigmentação">Pigmentação de barba — 5.000,00 Kz</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="appointmentDate"><i class="fa-solid fa-calendar-days"></i> Data</label>
+                            <input type="date" id="appointmentDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointmentTime"><i class="fa-solid fa-clock"></i> Horário</label>
+                            <select id="appointmentTime" required>
+                                <option value="">Selecione um horário</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes"><i class="fa-solid fa-note-sticky"></i> Observações (opcional)</label>
+                        <textarea id="notes" placeholder="Ex: Prefiro barbeiro experiente, barba cheia..."></textarea>
+                    </div>
+                    <button type="submit" class="btn"><i class="fa-solid fa-check"></i> Agendar Horário</button>
+                </form>
+            </section>
+            <!-- Listagem e Gerenciamento -->
+            <section class="card">
+                <h2 class="card-title"><i class="fa-solid fa-list-check"></i> Agendamentos Confirmados</h2>
+
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar por nome ou telefone...">
+                    </div>
+                    <select id="filterService">
+                        <option value="">Todos os serviços</option>
+                        <option value="Corte tradicional">Corte tradicional</option>
+                        <option value="Corte na navalha">Corte na navalha</option>
+                        <option value="Barba completa">Barba completa</option>
+                        <option value="Corte + Barba">Corte + Barba</option>
+                        <option value="Pigmentação">Pigmentação</option>
+                    </select>
+                </div>
+                <div class="appointments-list" id="appointmentsList">
+                    <div class="empty-message"><i class="fa-regular fa-face-smile"></i> Nenhum agendamento ainda.
+                        Faça o primeiro!</div>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalCount">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="todayCount">0</div>
+                        <div class="stat-label">Hoje</div>
+                    </div>
+                    <div class="stat-card stat-action">
+                        <button id="clearAllBtn" class="btn-small btn-danger">
+                            <i class="fa-solid fa-trash"></i> Limpar tudo
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
